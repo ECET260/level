@@ -76,7 +76,7 @@ static void MX_USB_OTG_FS_PCD_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_CRC_Init(void);
 /* USER CODE BEGIN PFP */
-
+// extern void Mel_Callback(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -124,6 +124,8 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
+//  HAL_EXTI_RegisterCallback(&H_EXTI_13, HAL_EXTI_COMMON_CB_ID, &Mel_Callback);
+
   GUI_Init();
 
   GUI_SetFont(&GUI_Font8x16);
@@ -140,6 +142,8 @@ int main(void)
   GUI_SetColor(GUI_WHITE);		//foreground or text color
 
   GUI_DispString("ECET260");
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -148,7 +152,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-  MX_MEMS_Process();
+	MX_MEMS_Process();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

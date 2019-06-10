@@ -36,7 +36,7 @@
 #define  __RTE_COMPONENTS_H__ 
 
 /* Defines ------------------------------------------------------------------*/
-#define GENERIC_LSM6DSL_6DORIENTATION_DEMO
+#define GENERIC_LSM6DSL_FIFOCONTINUOUSMODE_DEMO
 #define LSM6DSL_ACCGYR_I2C
 #define BSP_MOTION_SENSORS 
  

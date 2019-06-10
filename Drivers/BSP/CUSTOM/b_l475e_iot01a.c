@@ -232,7 +232,7 @@ int32_t BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
   /* Enable the BUTTON clock*/ 
   USER_BUTTON_GPIO_CLK_ENABLE();
   gpio_init_structure.Pin = BUTTON_PIN [Button];
-  gpio_init_structure.Pull = GPIO_PULLDOWN;
+  gpio_init_structure.Pull = GPIO_NOPULL; //GPIO_PULLDOWN;
   gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
   
   if(ButtonMode == BUTTON_MODE_GPIO)
@@ -244,7 +244,7 @@ int32_t BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
   else /* (ButtonMode == BUTTON_MODE_EXTI) */
   {      
     /* Configure Button pin as input with External interrupt */    
-    gpio_init_structure.Mode = GPIO_MODE_IT_RISING;
+    gpio_init_structure.Mode = GPIO_MODE_IT_FALLING; //GPIO_MODE_IT_RISING;
     
     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
     
