@@ -293,14 +293,16 @@ static void Accelero_Sensor_Handler(uint32_t Instance)
 
     printf("%s", dataOut);
 
-    GUI_DispStringAt("           ", 20, 130);
-    GUI_DispDecAt(acceleration.x, 20, 130, 4 );
+    GUI_SetFont(&GUI_Font20B_ASCII);
 
-    GUI_DispStringAt("           ", 20, 170);
-    GUI_DispDecAt(acceleration.y, 20, 165, 4 );
+//   GUI_DispStringAt("           ", 20, 130);
+//    GUI_DispDecAt(acceleration.x, 20, 130, 4 );
 
-    GUI_DispStringAt("           ", 20, 210);
-    GUI_DispDecAt(acceleration.z, 20, 200, 4 );
+//    GUI_DispStringAt("           ", 20, 170);
+//    GUI_DispDecAt(acceleration.y, 20, 165, 4 );
+
+ //   GUI_DispStringAt("           ", 20, 210);
+ //   GUI_DispDec(acceleration.z, 20, 200, 4 );
 
 //    snprintf(dataOut, MAX_BUF_SIZE, "%d", acceleration.x);
 //    GUI_DispStringHCenterAt(dataOut,20,130);

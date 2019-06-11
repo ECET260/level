@@ -147,7 +147,7 @@ int main(void)
   GUI_DispString("ECET260 Level\tStemwin ver: ");
 
   GUI_DispString(GUI_GetVersionString());
-  GUI_DispString("\n\n\n");
+  GUI_DispString("\n\n");
 
   GUI_SetFont(&GUI_Font32B_ASCII);
   GUI_SetColor(GUI_WHITE);		//foreground or text color
@@ -178,6 +178,8 @@ int main(void)
 
 
   GUI_SPRITE_SetPosition(hSprite, xPos-30,yPos-30);
+
+  GUI_Exec();
   }
   /* USER CODE END 3 */
 }
