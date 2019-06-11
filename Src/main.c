@@ -73,6 +73,9 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 /* USER CODE BEGIN PV */
 extern const GUI_BITMAP bmlemmling_Cartoon_penguin_small;
 extern CUSTOM_MOTION_SENSOR_Axes_t acceleration;
+
+int16_t xScaledArray[16] = {0};
+int16_t yScaledArray[16] = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -103,7 +106,11 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	GUI_HSPRITE hSprite;
 
+	int count = 0;
+
 	int xScaled, yScaled;
+	int32_t xAvg = 0;
+	int32_t yAvg = 0;
 	int xPos, yPos;
   /* USER CODE END 1 */
   
@@ -170,14 +177,34 @@ int main(void)
   MX_MEMS_Process();
     /* USER CODE BEGIN 3 */
 
+
   xScaled = (float)acceleration.x / 6.4;
-  xPos =  160 - xScaled;
+  xScaledArray[count] = xScaled;
+
+  for(int i=0; i<16; i++)
+	  xAvg += xScaledArray[i];
+
+  xAvg /= 16;
+
+  xPos =  160 - xAvg;
 
   yScaled = (float)acceleration.y / 8.53;
-  yPos = 120 + yScaled;
+  yScaledArray[count] = yScaled;
+
+  count++;
+  count %= 16;	//sliding window
+
+    for(int i=0; i<16; i++)
+  	  yAvg += yScaledArray[i];
+
+    yAvg /= 16;
+  yPos = 120 + yAvg;
 
 
   GUI_SPRITE_SetPosition(hSprite, xPos-30,yPos-30);
+
+  xAvg = 0;	//reset for next Avg calc
+  yAvg = 0;
 
   GUI_Exec();
   }
