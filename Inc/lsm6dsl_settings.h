@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    app_mems_int_pin_a_interface.c
+  * @file    lsm6dsl_settings.h
   * @author  MEMS Application Team
   * @version V0.0.1
   * @date    29-January-2018
-  * @brief   This file contains the MEMS INT pin A interface
+  * @brief   This file contains definitions for the LSM6DSL settings
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2019 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2018 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -35,26 +35,26 @@
   ******************************************************************************
   */
 
-/* Includes ------------------------------------------------------------------*/
-#include "app_mems_int_pin_a_interface.h"
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __LSM6DSL_SETTINGS_H__
+#define __LSM6DSL_SETTINGS_H__
 
-EXTI_HandleTypeDef hexti11 = {.Line = EXTI_LINE_11};
-extern volatile uint8_t MemsEventDetected;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-static void mems_int_pin_a_hardware_event_isr(void);
+#define LSM6DSL_ACC_ODR 104.0f /* ODR = 104Hz */
 
-void set_mems_int_pin_a_exti(void)
-{
-  /* register event irq handler */
-  HAL_EXTI_GetHandle(&hexti11, EXTI_LINE_11);
-  HAL_EXTI_RegisterCallback(&hexti11, HAL_EXTI_COMMON_CB_ID, mems_int_pin_a_hardware_event_isr);
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+#define LSM6DSL_ACC_FS 2 /* FS = 2g */
+
+#define LSM6DSL_GYRO_ODR 104.0f /* ODR = 104Hz */
+
+#define LSM6DSL_GYRO_FS 2000 /* FS = 2000dps */
+
+#ifdef __cplusplus
 }
+#endif
 
-static void mems_int_pin_a_hardware_event_isr(void)
-{
-  MemsEventDetected = 1;
-}
+#endif /* __LSM6DSL_SETTINGS_H__*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

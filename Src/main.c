@@ -14,6 +14,12 @@
   * the License. You may obtain a copy of the License at:
   *                             www.st.com/SLA0044
   *
+  *
+  *Mel Dundas
+  *June 11, 2019
+  *ECET260 Level - DataLog terminal accelerometer data
+  *and use a sprite to make a bubble level.
+  *
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -29,6 +35,9 @@
 #include "DIALOG.h"
 #include <stdio.h>
 #include "ts.h"
+
+#include "custom_motion_sensors.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,7 +71,8 @@ UART_HandleTypeDef huart3;
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
 /* USER CODE BEGIN PV */
-
+extern const GUI_BITMAP bmlemmling_Cartoon_penguin_small;
+extern CUSTOM_MOTION_SENSOR_Axes_t acceleration;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,7 +101,10 @@ static void MX_CRC_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+	GUI_HSPRITE hSprite;
 
+	int xScaled, yScaled;
+	int xPos, yPos;
   /* USER CODE END 1 */
   
 
@@ -131,7 +144,7 @@ int main(void)
   GUI_Clear();
 
   GUI_SetColor(GUI_CYAN);			//foreground or text color
-  GUI_DispString("ECET260 Test Program\tStemwin ver: ");
+  GUI_DispString("ECET260 Level\tStemwin ver: ");
 
   GUI_DispString(GUI_GetVersionString());
   GUI_DispString("\n\n\n");
@@ -139,7 +152,13 @@ int main(void)
   GUI_SetFont(&GUI_Font32B_ASCII);
   GUI_SetColor(GUI_WHITE);		//foreground or text color
 
-  GUI_DispString("ECET260");
+  GUI_DispString("Level");
+
+  GUI_DrawHLine(120, 0, 319);
+  GUI_DrawVLine(160, 0, 239);
+  GUI_DrawCircle(160, 120, 30);
+
+  hSprite = GUI_SPRITE_Create(&bmlemmling_Cartoon_penguin_small, 160-30,120-30);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -150,6 +169,15 @@ int main(void)
 
   MX_MEMS_Process();
     /* USER CODE BEGIN 3 */
+
+  xScaled = (float)acceleration.x / 6.4;
+  xPos =  160 - xScaled;
+
+  yScaled = (float)acceleration.y / 8.53;
+  yPos = 120 + yScaled;
+
+
+  GUI_SPRITE_SetPosition(hSprite, xPos-30,yPos-30);
   }
   /* USER CODE END 3 */
 }

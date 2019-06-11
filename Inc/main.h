@@ -30,7 +30,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal.h"
 
-#include "app_mems_int_pin_a_interface.h"
 #include "b_l475e_iot01a.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
