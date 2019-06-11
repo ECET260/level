@@ -74,8 +74,9 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 extern const GUI_BITMAP bmlemmling_Cartoon_penguin_small;
 extern CUSTOM_MOTION_SENSOR_Axes_t acceleration;
 
-int16_t xScaledArray[16] = {0};
-int16_t yScaledArray[16] = {0};
+#define numSamples 16
+int16_t xScaledArray[numSamples] = {0};
+int16_t yScaledArray[numSamples] = {0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -181,23 +182,20 @@ int main(void)
   xScaled = (float)acceleration.x / 6.4;
   xScaledArray[count] = xScaled;
 
-  for(int i=0; i<16; i++)
-	  xAvg += xScaledArray[i];
-
-  xAvg /= 16;
-
-  xPos =  160 - xAvg;
-
   yScaled = (float)acceleration.y / 8.53;
   yScaledArray[count] = yScaled;
 
-  count++;
-  count %= 16;	//sliding window
 
-    for(int i=0; i<16; i++)
-  	  yAvg += yScaledArray[i];
+  for(int i=0; i<numSamples; i++)
+  {
+	  xAvg += xScaledArray[i];
+	  yAvg += yScaledArray[i];
+  }
 
-    yAvg /= 16;
+  xAvg /= numSamples;
+  xPos =  160 - xAvg;
+
+  yAvg /= numSamples;
   yPos = 120 + yAvg;
 
 
@@ -205,6 +203,10 @@ int main(void)
 
   xAvg = 0;	//reset for next Avg calc
   yAvg = 0;
+
+  count++;
+  count %= numSamples;	//sliding window
+
 
   GUI_Exec();
   }
