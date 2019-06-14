@@ -293,25 +293,29 @@ static void Accelero_Sensor_Handler(uint32_t Instance)
 
     printf("%s", dataOut);
 
-    GUI_SetFont(&GUI_Font20B_ASCII);
+    GUI_SetFont(&GUI_Font13HB_1);
 
 //   GUI_DispStringAt("           ", 20, 130);
 //    GUI_DispDecAt(acceleration.x, 20, 130, 4 );
-
+//
 //    GUI_DispStringAt("           ", 20, 170);
 //    GUI_DispDecAt(acceleration.y, 20, 165, 4 );
-
- //   GUI_DispStringAt("           ", 20, 210);
- //   GUI_DispDec(acceleration.z, 20, 200, 4 );
-
-//    snprintf(dataOut, MAX_BUF_SIZE, "%d", acceleration.x);
-//    GUI_DispStringHCenterAt(dataOut,20,130);
 //
-//    snprintf(dataOut, MAX_BUF_SIZE, "%d", acceleration.y);
-//    GUI_DispStringHCenterAt(dataOut,20,165);
-//
-//    snprintf(dataOut, MAX_BUF_SIZE, "%d", acceleration.z);
-//    GUI_DispStringHCenterAt(dataOut,20,200);
+//    GUI_DispStringAt("           ", 20, 210);
+//    GUI_DispDecAt(acceleration.z, 20, 200, 4 );
+
+    snprintf(dataOut, MAX_BUF_SIZE, "X: % 4ld  ", acceleration.x);
+    GUI_DispStringAt(dataOut,30,150);
+
+    snprintf(dataOut, MAX_BUF_SIZE, "Y: % 4ld  ", acceleration.y);
+    GUI_DispStringAt(dataOut,30,180);
+
+    snprintf(dataOut, MAX_BUF_SIZE, "Z: % 4ld  ", acceleration.z);
+    GUI_DispStringAt(dataOut,30,210);
+
+//    snprintf(dataOut, MAX_BUF_SIZE, "X: %- 04d    Y: %- 04d    Z: %- 04d  ", acceleration.x, acceleration.y, acceleration.z);
+//    GUI_DispStringAt(dataOut,10,200);
+
 
   }
 }
